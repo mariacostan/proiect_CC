@@ -15,4 +15,6 @@ sequelize.authenticate().then(() => {
     console.log(err)
     console.log("Unable to connect to database")
 })
+
+
 app.listen(8080)
