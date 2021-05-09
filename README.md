@@ -13,4 +13,5 @@ La baza aplicației se află 2 API-uri. Unul este creat de mine, iar prin interm
 4. Flux de date
 
 Aplicația are la bază un server creat cu ajutorul Node.js și ExpressJs. Datele sunt stocate într-o bază de date MySql și pot fi accesate prin metodele HTTP (POST, GET, UPDATE, DELETE). Accesul la baza de date se realizează automat prin biblioteca Sequelize. Utilizatorul va putea adăuga o melodie, șterge și afișa toate melodiile adăugate până atunci. Atunci când utilizatorul face o cerere pe server de tip CRUD, serverul web va prelucra această cerere și va returna un conținut pe care browserul îl va interpreta și îl va afișa utilizatorului în format JSON,XML etc.
+
      1) Exemple de request / response
