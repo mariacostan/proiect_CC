@@ -1,4 +1,178 @@
 <!DOCTYPE html>
 <html>
-    <h1>Hello</h1>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>My Songs</title>
+    </head>
+<style>
+        body {
+       background-color: #F3EBF6;
+        font-family: 'Ubuntu', sans-serif;
+    }
+    .id{
+         background-color: #F3EBF6;
+        width: 500px;
+        height: 540px;
+        float: right;
+        margin-top: 30px;
+        margin-right: 20px;
+        box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+    }
+    .titlu{
+        width: 
+   font-size: 25px;
+   color: purple;
+   margin: 30px;   
+    }
+    img{
+            margin-left:140px;
+            margin-top:50px;
+            margin-right:100px;
+            width: 600px;
+            height:400px;
+            border-radius:1.5em;
+            
+        }
+        .un{
+             border: 8px solid rgba(0, 0, 0, 0.18);
+             margin-left:55px;
+             text-align: center;
+                width: 70%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+   outline:none;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-bottom: 27px;
+    font-family: 'Ubuntu', sans-serif;
+    }
+        .submit{
+            cursor: pointer;
+        color: #fff;
+        background-color: #896794;
+        border: 0;
+        padding-left: 40px;
+        padding-right: 60px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+       align:center;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 5%;
+        margin-bottom: 5%;
+        font-size: 13px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);  
+        }
+      p{
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+       color: #de83ee;
+       padding-top: 15px;
+    
+       }
+       a.lista{
+               cursor: pointer;
+        color: #fff;
+        background: #896794;
+        border: 0;
+        padding-left: 40px;
+        padding-right: 60px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+      
+        font-family: 'Ubuntu', sans-serif;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);  
+           text-decoration:none;
+           margin-left: 80px;
+           margin-top: 70px;
+           font-size: 20px;
+       }
+  
+</style>
+    <body>
+        
+        
+        
+ <div class="id">
+     <h1 align="center">Add a song to my favorite songs</h1>
+
+<form onsubmit="AddSong(event)">
+  <input class="un" type="hidden" name="id" id="id" align="center" /><br>
+  <input class="un" autocomplete="off" type="text" name="song_name" id="song_name" align="center"/ placeholder="Song Name"><br />
+  <br/>
+  <input class="un" autocomplete="off" type="text" name="artist" id="artist" align="center" placeholder="Artist"><br/>
+  <input class="un" autocomplete="off" type="text" name="genre" id="genre" align="center" placeholder="Genre"><br/>
+  <input class="un" autocomplete="off" type="number" name="year" id="year" align="center" placeholder="Year"><br/>
+
+  <input class="submit" type="submit"  value="Add a new favorite song">
+  <input class="submit" type="reset"  value="Cancel">
+</form>
+</div>
+
+<div id="table"></div>
+<div class="titlu">
+             <img src="image.jpg" alt="songs" align="center">
+        </div>
+        <br/>
+<a  class="lista" href="listOfSongs.html">View your list of songs</a></br></br></br>
+<a  class="lista" href="searchSong.html">Search a song</a>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script 
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        console.log('Hello from JQuery')
+    })
+
+
+    function AddSong(event) {
+    event.preventDefault()
+
+    let id = $('#id').val()
+    let song_name = $('#song_name').val()
+    let artist = $('#artist').val()
+    let genre = $('#genre').val() 
+    let year = $('#year').val() 
+
+    if(id) {
+    axios.put('/songs/'+id, {
+    song_name: song_name,
+    artist: artist,
+    genre: genre,
+    year: year
+
+}).then(function(result) {
+  //showRecipes()
+    $(event.target).trigger("reset")
+}).catch(function(err) {
+    alert('Resource could not be saved')
+})
+    
+    }else {
+    axios.post('/songs', {
+ song_name: song_name,
+    artist: artist,
+    genre: genre,
+    year: year
+        
+    }).then(function(result) {
+  // showRecipes()
+    $(event.target).trigger("reset")
+}).catch(function(err) {
+    alert('Resource could not be saved')
+})
+     }
+//showBooks()
+}
+</script>
+    </body>
 </html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  
+<title>Books Search</title>
+<style>
+    #search{
+	width:500px;
+	height:150px;
+	margin:auto;
+	margin-top:20px;
+	padding:15px;
+}
+
+.aligning{
+	margin-left:600px;
+	margin-top:10px;
+}
+
+#result{
+	margin-top:50px;
+}
+body{
+	  background-color: #d5c3db;
+        font-family: 'Ubuntu', sans-serif;
+}
+button.btn{
+	cursor: pointer;
+        color: black;
+        background-color: #896794;
+        border: 0;
+       text-align:center;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 30%;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);  
+}
+button.btnn{
+	cursor: pointer;
+        color: #black;
+        border: 0;
+       text-align:center;
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 60%;
+        font-size: 15px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);  
+}
+</style>
+</head>
+<body>
+<i><p style="margin-left:520px;"> You can search here a song or an album after title or a meaningful word <p></i>	
+	<div id="search" class="#f5f5f5 grey lighten-4 z-depth-5">
+		<form onsubmit="SearchSong(event)" id="myform">
+			<div class="input-field">
+				<input type="search" autocomplete="off" id="songs">
+				<label for="search">Search a song</label>
+			</div>
+			<button class="btn" >Search Songs</button>
+		</form>
+	</div>
+	<div class="row" id="result">
+		
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+	<script type="text/javascript">
+
+
+    $(document).ready(function() {
+        console.log('Hello from JQuery')
+    })
+
+let output=document.querySelector('#result');
+    function SearchSong(event) {
+    event.preventDefault()
+    var result_output="";
+    var song = "";
+   	  var img = "";
+      var title = "";
+      var artist = "";
+     var search = $("#songs").val();
+     console.log(search)
+     if(search == "")
+   	  {
+   	  	alert("Please enter something in the field");
+   	  }
+    let url="https://itunes.apple.com/search?term=" + search 
+    let cors='https://cors-anywehere.herokuapp.com/'
+     fetch(url)
+     .then(data => data.json())
+     .then(json =>{
+         console.log(json)
+         json.results.forEach(song =>{
+             if(song.kind=="song"){
+               result_output+=
+               `
+               <div class="col s3 m3 l3">
+               <div class="card">
+    <div class="card-image waves-effect waves-block waves-light">
+      <img class="activator" src="${song.artworkUrl100}">
+    </div>
+    <div class="card-content">
+      <span class="card-title activator grey-text text-darken-4">${song.trackCensoredName}<i class="material-icons right">more_vert</i></span>
+      <p>${song.artistName}</p>
+    </div>
+    <div class="card-reveal">
+      <span class="card-title grey-text text-darken-4">More Details<i class="material-icons right">close</i></span>
+      <p>Release Date: ${song.releaseDate}</p>
+      <a href="${song.artistViewUrl}">More about the artist</a>
+      <p>Album: ${song.collectionName}</p>
+    <p>Genre: ${song.primaryGenreName}</p>
+    </div>
+  </div>
+  </div>
+  `;
+             };
+  output.innerHTML=result_output;
+            //  result_output+=
+            // title=$('<h5 class="center-align black-text">' + song.trackName + '</h5>');  
+            // img = $('<img class=" aligning" src='+ song.artworkUrl100 + '>'); 
+            // title.appendTo('#result');
+            // img.appendTo('#result');
+         })
+
+     })
+     .catch(error => console.log(error))
+    }
+
+   
+
+</script>
+</body>
+
+</html>

@@ -1,6 +1,12 @@
 {
+    "build": {
+        "@saveall": true
+    },
     "extensions": {
         "@aws.profile": "profile:default"
+    },
+    "instance": {
+        "@automaticShutdown": "30"
     },
     "language": {
         "tern_defs": {

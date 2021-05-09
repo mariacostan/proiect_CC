@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Book List
+    </title> 
+    <style>
+           body {
+       background-color: #F3EBF6;
+        font-family: 'Ubuntu', sans-serif;
+    }
+    .buton{
+                    cursor: pointer;
+        color: #fff;
+        background: #896794;
+        border: 0;
+        padding-left: 40px;
+        padding-right: 60px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+       
+        font-family: 'Ubuntu', sans-serif;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);  
+           text-decoration:none;
+           margin-left: 50px;
+           margin-top: 70px;
+           font-size: 15px;
+    }
+    .titlu{
+   font-size: 25px;
+   color: #896794;
+   margin: 30px;   
+    }
+    .btn{
+         cursor: pointer;
+        color: #fff;
+        background:#896794;
+        border: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+       
+        font-family: 'Ubuntu', sans-serif;
+        margin-left: 5%;
+        font-size: 10px;
+        box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);  
+    }
+    </style>
+    </head>
+    <body>
+        <div class="titlu"><h1 align="center"><b><i>Your list of songs</i></b></h1></div>
+        
+        <div id="table"></div>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+    <script type="text/javascript">
+             function showSongs() {
+    axios.get('/songs').then(function(results) {
+
+        let html = ` <table style="width:1100px;margin-left: 150px;">
+                <tr style="width:500px;border: 1px solid black;">
+                    <th style="width:50px;background-color: #896794;">ID</th>
+                    <th style="width:200px;background-color: #896794;">Song Name</th>
+                    <th style= "width:200px; background-color: #896794;">Artist</th> 
+                    <th style= "width:200px; background-color: #896794;">Genre</th>
+                    <th style= "width:450px; background-color:#896794;">Year</th>
+                    <th style= "width:200px;"></th>
+                </tr>`
+
+        results.data.forEach(function(element) {
+            html += `<tr>
+                        <td style="text-align:center; background-color:#FFF5EE">${element.id}</td>
+                        <td style="text-align:center;background-color:#FFF5EE;">${element.song_name}</td>
+                        <td style="text-align:center;background-color:#FFF5EE;">${element.artist}</td>
+                        <td id="subject"  style="text-align:center;background-color:#FFF5EE;">${element.genre}</td>
+                        <td contenteditable ="true" id="description" style="background-color:#FFF5EE;padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:10px;">${element.year}</td>
+                         <td style="background-color:#F3EBF6;">
+                            <button class="btn" onClick="deleteSong(${element.id})">Delete</button>
+                        </td>
+                    </tr>`
+        })
+
+        html += `</table>`
+
+        $('#table').html(html)
+    }).catch(function(error) {
+        console.log(error)
+    })
+}
+showSongs()
+
+function deleteSong(id) {
+   if(confirm('Delete this song?')) {
+    axios.delete('/songs/'+id).then(function(result) {
+        showSongs()
+    }).catch(function(err) {
+        alert('Resource could not delete resource')
+    }) 
+} else{
+  showSongs()  
+}
+}
+   </script>
+        <button class="buton"  onClick="history.back(-1)">Back to main page</button>
+    </body>
+</html>
+    
