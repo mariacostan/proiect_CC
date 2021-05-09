@@ -1,2 +1,2 @@
-1. Introducere
+1. Introducere /n
 Aplicatia dezvoltata are
