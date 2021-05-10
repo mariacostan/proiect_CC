@@ -15,3 +15,29 @@ La baza aplicației se află 2 API-uri. Unul este creat de mine, iar prin interm
 Aplicația are la bază un server creat cu ajutorul Node.js și ExpressJs. Datele sunt stocate într-o bază de date MySql și pot fi accesate prin metodele HTTP (POST, GET, UPDATE, DELETE). Accesul la baza de date se realizează automat prin biblioteca Sequelize. Utilizatorul va putea adăuga o melodie, șterge și afișa toate melodiile adăugate până atunci. Atunci când utilizatorul face o cerere pe server de tip CRUD, serverul web va prelucra această cerere și va returna un conținut pe care browserul îl va interpreta și îl va afișa utilizatorului în format JSON,XML etc.
 
      1) Exemple de request / response
+
+     2)Metode HTTP
+    
+     POST
+     Această metodă presupune crearea unor noi date pe server. În imaginea de mai jos, este reprezentat un request de tip POST:
+  ![image](https://user-images.githubusercontent.com/83112911/117665364-6a8bc180-b1ab-11eb-9cf2-43dfa9ad4fd1.png)
+
+  ![image](https://user-images.githubusercontent.com/83112911/117667085-36190500-b1ad-11eb-8230-143d61578c88.png)
+
+     GET
+     Metoda GET are rolul de a afișa datele de pe server. 
+   ![image](https://user-images.githubusercontent.com/83112911/117666124-35cc3a00-b1ac-11eb-9ae2-e982a76dcbb5.png)
+   ![image](https://user-images.githubusercontent.com/83112911/117667142-4630e480-b1ad-11eb-8ea5-44770f39cbe9.png)
+
+     DELETE
+     Metoda DELETE e folosită pentru a șterge date de pe server.
+   ![image](https://user-images.githubusercontent.com/83112911/117667475-96a84200-b1ad-11eb-853c-c6a99f7c658e.png)
+     Se poate observa in screenshotul de mai jos că înregistrarea cu id=3 a fost ștearsă.
+   ![image](https://user-images.githubusercontent.com/83112911/117667656-c2c3c300-b1ad-11eb-8567-31bc7d8ef35b.png)
+   
+     3) iTunes API (Public API)
+
+
+
+
+
