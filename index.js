@@ -3,26 +3,11 @@ const app = express()
 app.use('/', express.static('frontend'))
 
 const Sequelize = require('sequelize')
-let sequelize
 
-if(process.env.CLEARDB_DATABASE_URL){
-    let result = process.env.CLEARDB_DATABASE_URL.split(";")
-
-    sequelize = new Sequelize(result[0].split("=")[1], result[2].split("=")[1], result[3].split("=")[1], {
-    dialect: "mysql",
-    host: result[1].split("=")[1].split(":")[0],
-    port: result[1].split("=")[1].split(":")[1]
-})
-}
-else{
-   sequelize = new Sequelize('my_db', 'maria.costan', '123456789Maria23ase@', {
+const sequelize = new Sequelize('my_db', 'maria.costan', '123456789Maria23ase@', {
     dialect: "mysql",
     host: "localhost"
-
 })
-}
-
-
 
 sequelize.authenticate().then(() => {
     console.log("Connected to database")
