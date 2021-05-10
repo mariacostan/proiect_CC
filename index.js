@@ -4,9 +4,16 @@ app.use('/', express.static('frontend'))
 
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize('my_db', 'maria.costan', '123456789Maria23ase@', {
+
+
+// const sequelize = new Sequelize('my_db', 'maria.costan', '123456789Maria23ase@', {
+//     dialect: "mysql",
+//     host: "localhost"
+// })
+
+const sequelize = new Sequelize('heroku_f8651097a36a731', 'b51b53d2e787da', '586080b3', {
     dialect: "mysql",
-    host: "localhost"
+    host: "us-cdbr-east-03.cleardb.com"
 })
 
 sequelize.authenticate().then(() => {
